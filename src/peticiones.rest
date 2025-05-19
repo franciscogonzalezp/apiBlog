@@ -1,0 +1,23 @@
+
+GET http://localhost:3000/api/posts
+###
+GET http://localhost:3000/api/posts/2
+###
+GET http://localhost:3000/api/posts/autor/1
+###
+POST http://localhost:3000/api/posts
+
+
+###
+GET http://localhost:3000/api/autores
+###
+GET http://localhost:3000/api/autores/3
+###
+POST http://localhost:3000/api/autores
+Content-Type: application/json
+
+{
+    "nombre": "MarietaBlue",
+    "email": "MarietaBlue@email.com",
+    "imagen": "https://placehold.co/600x400/png"
+}
