@@ -1,31 +1,58 @@
+@host = http://localhost:3000
 
-GET http://localhost:3000/api/posts
+GET {{host}}/api/posts
 ###
-GET http://localhost:3000/api/posts/1
+GET {{host}}/api/posts/1
 ###
-GET http://localhost:3000/api/posts/autor/1
+GET {{host}}/api/posts/autor/9
 ###
-POST http://localhost:3000/api/posts
+POST {{host}}/api/posts
 Content-Type: application/json
 
 {
     "titulo": "Receta de tarta de zanahoria",
     "descripcion": "Receta facil y sencilla para hacer una deliciosa tarta de zanahoria",
     "categoria": "Cocina",
-    "autorId": "99"
+    "autorId": "9"
 }
 
-
 ###
-GET http://localhost:3000/api/autores
-###
-GET http://localhost:3000/api/autores/9
-###
-POST http://localhost:3000/api/autores
+PUT {{host}}/api/posts/7
 Content-Type: application/json
 
 {
-    "nombre": "Laura",
-    "email": "laura@email.com",
+    "titulo": "Receta de tarta de zanahoria mejorada",
+    "descripcion": "Mejorada esta receta facil y sencilla para hacer una deliciosa tarta de zanahoria",
+    "categoria": "Cocina"
+}
+
+###
+DELETE {{host}}/api/posts/7
+
+################################################################3
+###
+GET {{host}}/api/autores
+###
+GET {{host}}/api/autores/9
+###
+POST {{host}}/api/autores
+Content-Type: application/json
+
+{
+    "nombre": "JoseH",
+    "email": "jose@email.com",
     "imagen": "https://placehold.co/600x400/png"
 }
+
+###
+PUT {{host}}/api/autores/9
+Content-Type: application/json
+
+{
+    "nombre": "Laura recetas",
+    "email": "laurarecetas@email.com",
+    "imagen": "https://placehold.co/500x400/png"
+}
+
+###
+DELETE {{host}}/api/autores/10

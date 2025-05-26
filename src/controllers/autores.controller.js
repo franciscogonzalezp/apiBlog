@@ -17,4 +17,19 @@ const create = async (req, res) => {
     res.json(autor)
 }
 
-module.exports = { getAll, getById, create }
+const edit = async (req, res) => {
+    const { autorId } = req.params;
+
+    const result = await Autor.updateById(autorId, req.body);
+    const autor = await Autor.selectById(autorId);
+
+    res.json(autor);
+}
+
+const remove = async (req, res) => {
+    const { autorId } = req.params;
+    await Autor.deleteById(autorId);
+    res.json({message: 'Autor eliminado correctamente'});
+}
+
+module.exports = { getAll, getById, create, edit, remove }

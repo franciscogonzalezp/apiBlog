@@ -13,9 +13,6 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
     const { postId } = req.params;
     const post = await Post.selectById(postId)
-    if(!post) res.status(404).json({message: 'No existe un post con el ID introducido'});
-    const autor = await Autor.selectById(post.id_autor)
-    post.autor = autor
     
     res.json(post)
 }
@@ -38,4 +35,19 @@ const create = async (req, res) => {
     res.json(post);
 }
 
-module.exports = { getAll, getById, getByAutor, create }
+const edit = async (req, res) => {
+    const { postId } = req.params;
+
+    const result = await Post.updateById(postId, req.body);
+    const post = await Post.selectById(postId);
+
+    res.json(post);
+}
+
+const remove = async (req, res) => {
+    const { postId } = req.params;
+    await Post.deleteById(postId);
+    res.json({message: 'Post eliminado correctamente'});
+}
+
+module.exports = { getAll, getById, getByAutor, create, edit, remove }

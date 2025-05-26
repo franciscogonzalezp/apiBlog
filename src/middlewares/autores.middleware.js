@@ -1,6 +1,6 @@
 const Autor = require('../models/autores.model')
 const checkAutorId = async (req, res, next) => {
-    const { autorId } = req.method === 'GET' ? req.params : req.body
+    const { autorId } = req.method === 'POST' ? req.body : req.params
 
     if (!autorId) return res.status(400).json({ message: 'El id del autor no tiene valor' });
     if (isNaN(autorId)) return res.status(400).json({ message: 'El id del autor no es un número' });
