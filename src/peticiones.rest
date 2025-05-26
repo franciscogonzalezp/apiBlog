@@ -1,23 +1,31 @@
 
 GET http://localhost:3000/api/posts
 ###
-GET http://localhost:3000/api/posts/2
+GET http://localhost:3000/api/posts/1
 ###
 GET http://localhost:3000/api/posts/autor/1
 ###
 POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+    "titulo": "Receta de tarta de zanahoria",
+    "descripcion": "Receta facil y sencilla para hacer una deliciosa tarta de zanahoria",
+    "categoria": "Cocina",
+    "autorId": "99"
+}
 
 
 ###
 GET http://localhost:3000/api/autores
 ###
-GET http://localhost:3000/api/autores/3
+GET http://localhost:3000/api/autores/9
 ###
 POST http://localhost:3000/api/autores
 Content-Type: application/json
 
 {
-    "nombre": "MarietaBlue",
-    "email": "MarietaBlue@email.com",
+    "nombre": "Laura",
+    "email": "laura@email.com",
     "imagen": "https://placehold.co/600x400/png"
 }

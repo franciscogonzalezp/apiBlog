@@ -11,9 +11,10 @@ const getById = async (req, res) => {
     res.json(autor)
 }
 
-const create = (req, res) => {
-    const result = Autor.insert(req.body)
-    res.send(`Creando nuevo autor ${result}`)
+const create = async (req, res) => {
+    const result = await Autor.insert(req.body)
+    const autor = await Autor.selectById(result.insertId);
+    res.json(autor)
 }
 
 module.exports = { getAll, getById, create }

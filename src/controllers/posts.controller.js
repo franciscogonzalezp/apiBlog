@@ -1,19 +1,41 @@
-const getAll = (req, res) => {
-    res.send('Listado con todos los post')
+const Post = require('../models/posts.model');
+const Autor = require('../models/autores.model');
+
+const getAll = async (req, res) => {
+    const posts = await Post.selectAll();
+    for(let post of posts){
+        const autor = await Autor.selectById(post.id_autor)
+        post.autor = autor
+    }
+    res.json(posts)
 }
 
-const getById = (req, res) => {
+const getById = async (req, res) => {
     const { postId } = req.params;
-    res.send(`Post con id ${postId}`)
+    const post = await Post.selectById(postId)
+    if(!post) res.status(404).json({message: 'No existe un post con el ID introducido'});
+    const autor = await Autor.selectById(post.id_autor)
+    post.autor = autor
+    
+    res.json(post)
 }
 
-const getByAutor = (req, res) => {
+const getByAutor = async (req, res) => {
     const {autorId} = req.params;
-    res.send(`Listado de post del autor ${autorId}`)
+    const posts = await Post.selectByAutor(autorId)
+    if(!posts) res.status(404).json({message: 'No existen posts con ese autor'});
+    for(let post of posts){
+        const autor = await Autor.selectById(post.id_autor)
+        post.autor = autor
+    }
+    res.json(posts)
 }
 
-const create = (req, res) => {
-    res.send('Creando un nuevo post...')
+const create = async (req, res) => {
+    const {titulo, descripcion, categoria, autorId} = req.body;
+    const result = await Post.insert({titulo, descripcion, categoria, autorId})
+    const post = await Post.selectById(result.insertId);
+    res.json(post);
 }
 
 module.exports = { getAll, getById, getByAutor, create }
